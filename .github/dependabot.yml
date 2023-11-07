@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/Bom.Squad"
+    schedule:
+      interval: "weekly"
