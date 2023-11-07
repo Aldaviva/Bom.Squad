@@ -47,6 +47,8 @@ jobs:
       uses: coverallsapp/github-action@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        files: Test/TestResults/*/coverage.info
+        format: lcov
 
     - name: Stop if x64 tests failed
       run: exit $env:TEST_EXIT_CODE_X64
