@@ -17,7 +17,7 @@
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageTags>utf utf8 unicode bom byte-order-marker</PackageTags>
+        <PackageTags>utf utf8 unicode bom byte-order-mark</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>

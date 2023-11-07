@@ -4,7 +4,7 @@ using System.Text;
 namespace Bom.Squad;
 
 /// <summary>
-/// <para>Allows you to modify the base class library <see cref="Encoding.UTF8"/> to not output byte order markers when encoding, although it will still parse them correctly.</para>
+/// <para>Allows you to modify the base class library <see cref="Encoding.UTF8"/> to not output byte order marks when encoding, although it will still parse them correctly.</para>
 /// <para>Other encodings, such as <see cref="Encoding.Unicode"/> and <c>new UTF8Encoding(true, true)</c>, will not be affected.</para>
 ///
 /// <para>Usage:</para>
@@ -13,7 +13,7 @@ namespace Bom.Squad;
 public static class BomSquad {
 
     /// <summary>
-    /// <para>Modify the base class library <see cref="Encoding.UTF8"/> to not output byte order markers when encoding, although it will still parse them correctly.</para>
+    /// <para>Modify the base class library <see cref="Encoding.UTF8"/> to not output byte order marks when encoding, although it will still parse them correctly.</para>
     /// <para>After calling this method, the <see cref="Encoding.UTF8"/> instance will behave as if was constructed with the <c>encoderShouldEmitUTF8Identifier</c> constructor parameter set to false, so it will not write BOMs.</para>
     /// <para>Other encodings, such as <see cref="Encoding.Unicode"/> and <c>new UTF8Encoding(true, true)</c>, will not be affected.</para>
     /// </summary>
