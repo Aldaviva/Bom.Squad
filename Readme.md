@@ -1,7 +1,7 @@
-<img src="https://raw.githubusercontent.com/Aldaviva/Bom.Squad/master/Bom.Squad/icon.png" height="32" alt="💣" /> Bom.Squad
+💣 Bom.Squad
 ===
 
-[![Nuget](https://img.shields.io/nuget/v/Bom.Squad?logo=nuget&color=success)](https://www.nuget.org/packages/Bom.Squad/) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Aldaviva/Bom.Squad/dotnetpackage.yml?branch=master&logo=github)](https://github.com/Aldaviva/Bom.Squad/actions/workflows/dotnetpackage.yml) [![Testspace](https://img.shields.io/testspace/tests/Aldaviva/Aldaviva:Bom.Squad/master?passed_label=passing&failed_label=failing&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4NTkgODYxIj48cGF0aCBkPSJtNTk4IDUxMy05NCA5NCAyOCAyNyA5NC05NC0yOC0yN3pNMzA2IDIyNmwtOTQgOTQgMjggMjggOTQtOTQtMjgtMjh6bS00NiAyODctMjcgMjcgOTQgOTQgMjctMjctOTQtOTR6bTI5My0yODctMjcgMjggOTQgOTQgMjctMjgtOTQtOTR6TTQzMiA4NjFjNDEuMzMgMCA3Ni44My0xNC42NyAxMDYuNS00NFM1ODMgNzUyIDU4MyA3MTBjMC00MS4zMy0xNC44My03Ni44My00NC41LTEwNi41UzQ3My4zMyA1NTkgNDMyIDU1OWMtNDIgMC03Ny42NyAxNC44My0xMDcgNDQuNXMtNDQgNjUuMTctNDQgMTA2LjVjMCA0MiAxNC42NyA3Ny42NyA0NCAxMDdzNjUgNDQgMTA3IDQ0em0wLTU1OWM0MS4zMyAwIDc2LjgzLTE0LjgzIDEwNi41LTQ0LjVTNTgzIDE5Mi4zMyA1ODMgMTUxYzAtNDItMTQuODMtNzcuNjctNDQuNS0xMDdTNDczLjMzIDAgNDMyIDBjLTQyIDAtNzcuNjcgMTQuNjctMTA3IDQ0cy00NCA2NS00NCAxMDdjMCA0MS4zMyAxNC42NyA3Ni44MyA0NCAxMDYuNVMzOTAgMzAyIDQzMiAzMDJ6bTI3NiAyODJjNDIgMCA3Ny42Ny0xNC44MyAxMDctNDQuNXM0NC02NS4xNyA0NC0xMDYuNWMwLTQyLTE0LjY3LTc3LjY3LTQ0LTEwN3MtNjUtNDQtMTA3LTQ0Yy00MS4zMyAwLTc2LjY3IDE0LjY3LTEwNiA0NHMtNDQgNjUtNDQgMTA3YzAgNDEuMzMgMTQuNjcgNzYuODMgNDQgMTA2LjVTNjY2LjY3IDU4NCA3MDggNTg0em0tNTU3IDBjNDIgMCA3Ny42Ny0xNC44MyAxMDctNDQuNXM0NC02NS4xNyA0NC0xMDYuNWMwLTQyLTE0LjY3LTc3LjY3LTQ0LTEwN3MtNjUtNDQtMTA3LTQ0Yy00MS4zMyAwLTc2LjgzIDE0LjY3LTEwNi41IDQ0UzAgMzkxIDAgNDMzYzAgNDEuMzMgMTQuODMgNzYuODMgNDQuNSAxMDYuNVMxMDkuNjcgNTg0IDE1MSA1ODR6IiBmaWxsPSIjZmZmIi8%2BPC9zdmc%2B)](https://aldaviva.testspace.com/spaces/245919) [![Coveralls](https://img.shields.io/coveralls/github/Aldaviva/Bom.Squad?logo=coveralls)](https://coveralls.io/github/Aldaviva/Bom.Squad?branch=master)
+[![Nuget](https://img.shields.io/nuget/v/Bom.Squad?logo=nuget&color=blue)](https://www.nuget.org/packages/Bom.Squad/) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Aldaviva/Bom.Squad/dotnetpackage.yml?branch=master&logo=github)](https://github.com/Aldaviva/Bom.Squad/actions/workflows/dotnetpackage.yml) [![Testspace](https://img.shields.io/testspace/tests/Aldaviva/Aldaviva:Bom.Squad/master?passed_label=passing&failed_label=failing&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4NTkgODYxIj48cGF0aCBkPSJtNTk4IDUxMy05NCA5NCAyOCAyNyA5NC05NC0yOC0yN3pNMzA2IDIyNmwtOTQgOTQgMjggMjggOTQtOTQtMjgtMjh6bS00NiAyODctMjcgMjcgOTQgOTQgMjctMjctOTQtOTR6bTI5My0yODctMjcgMjggOTQgOTQgMjctMjgtOTQtOTR6TTQzMiA4NjFjNDEuMzMgMCA3Ni44My0xNC42NyAxMDYuNS00NFM1ODMgNzUyIDU4MyA3MTBjMC00MS4zMy0xNC44My03Ni44My00NC41LTEwNi41UzQ3My4zMyA1NTkgNDMyIDU1OWMtNDIgMC03Ny42NyAxNC44My0xMDcgNDQuNXMtNDQgNjUuMTctNDQgMTA2LjVjMCA0MiAxNC42NyA3Ny42NyA0NCAxMDdzNjUgNDQgMTA3IDQ0em0wLTU1OWM0MS4zMyAwIDc2LjgzLTE0LjgzIDEwNi41LTQ0LjVTNTgzIDE5Mi4zMyA1ODMgMTUxYzAtNDItMTQuODMtNzcuNjctNDQuNS0xMDdTNDczLjMzIDAgNDMyIDBjLTQyIDAtNzcuNjcgMTQuNjctMTA3IDQ0cy00NCA2NS00NCAxMDdjMCA0MS4zMyAxNC42NyA3Ni44MyA0NCAxMDYuNVMzOTAgMzAyIDQzMiAzMDJ6bTI3NiAyODJjNDIgMCA3Ny42Ny0xNC44MyAxMDctNDQuNXM0NC02NS4xNyA0NC0xMDYuNWMwLTQyLTE0LjY3LTc3LjY3LTQ0LTEwN3MtNjUtNDQtMTA3LTQ0Yy00MS4zMyAwLTc2LjY3IDE0LjY3LTEwNiA0NHMtNDQgNjUtNDQgMTA3YzAgNDEuMzMgMTQuNjcgNzYuODMgNDQgMTA2LjVTNjY2LjY3IDU4NCA3MDggNTg0em0tNTU3IDBjNDIgMCA3Ny42Ny0xNC44MyAxMDctNDQuNXM0NC02NS4xNyA0NC0xMDYuNWMwLTQyLTE0LjY3LTc3LjY3LTQ0LTEwN3MtNjUtNDQtMTA3LTQ0Yy00MS4zMyAwLTc2LjgzIDE0LjY3LTEwNi41IDQ0UzAgMzkxIDAgNDMzYzAgNDEuMzMgMTQuODMgNzYuODMgNDQuNSAxMDYuNVMxMDkuNjcgNTg0IDE1MSA1ODR6IiBmaWxsPSIjZmZmIi8%2BPC9zdmc%2B)](https://aldaviva.testspace.com/spaces/245919) [![Coveralls](https://img.shields.io/coveralls/github/Aldaviva/Bom.Squad?logo=coveralls)](https://coveralls.io/github/Aldaviva/Bom.Squad?branch=master)
 
 <!-- MarkdownTOC autolink="true" bracket="round" levels="1,2,3" bullets="1." -->
 
@@ -68,15 +68,14 @@ If you're worried about forgetting to use `new UTF8Encoding(false, true)` instea
 1. Go to ReSharper → Options → Code Inspection → Custom Patterns → Add Pattern.
 1. Set **Search pattern** to `Encoding.UTF8`.
 1. Set **Pattern severity** to `Show as warning` or whatever level you want.
-1. Set **Suppression key** to something like `utfbom`.
-1. Set **Description** to something like `Encoding.UTF8 includes a BOM, which is incompatible with most non-Microsoft UTF-8 decoders.`.
+1. Set **Suppression key** to something like `utfbom` and its **Description** to something like `Encoding.UTF8 includes a BOM, which is incompatible with most non-Microsoft UTF-8 decoders.`.
 1. Set **Replace pattern** to `new System.Text.UTF8Encoding(false, true)`.
 1. Enable **Format after replace**.
 1. Enable **Shorten references**.
 1. Set **Dscription** to something like `UTF8 without BOM`.
 1. Click **Save**.
 
-![ReSharper custom pattern](https://pbs.twimg.com/media/FVzh680VEAA4Sl3?format=png&name=large)
+![ReSharper custom pattern](https://raw.githubusercontent.com/Aldaviva/Bom.Squad/master/Bom.Squad/highlighting-pattern.png)
 
 ### Cross-cutting program-wide fix
 
