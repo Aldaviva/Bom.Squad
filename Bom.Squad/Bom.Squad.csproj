@@ -17,6 +17,7 @@
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Description>Disable writing UTF-8 byte order marks (BOMs) in .NET</Description>
         <PackageTags>utf utf8 unicode bom byte-order-mark</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
