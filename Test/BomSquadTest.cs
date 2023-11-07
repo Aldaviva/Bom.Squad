@@ -3,13 +3,14 @@ using FluentAssertions;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Xunit.Abstractions;
 
 namespace Test;
 
 public class BomSquadTest {
 
-    public BomSquadTest() {
-        BomSquad.DefuseUtf8Bom();
+    public BomSquadTest(ITestOutputHelper outputHelper) {
+        outputHelper.WriteLine($".NET {(PlatformInfo.IsNetCore ? "Core" : "Framework")} {(PlatformInfo.Is64Bit ? "64-bit" : "32-bit")}");
     }
 
     [Fact]
@@ -31,7 +32,6 @@ public class BomSquadTest {
         Decode(input, new UTF8Encoding(false, true)).Should().Be(expected);
         Decode(input, new UTF8Encoding(true, true)).Should().Be(expected);
         Decode(input, Encoding.UTF8).Should().Be(expected);
-
     }
 
     [Fact]
@@ -40,6 +40,7 @@ public class BomSquadTest {
         const string input    = "hi";
 
         Encode(input, new UTF8Encoding(false, true)).Should().Equal(expected);
+        BomSquad.DefuseUtf8Bom();
         Encode(input, Encoding.UTF8).Should().Equal(expected);
         Encoding.UTF8.GetBytes(input).Should().Equal(expected);
     }

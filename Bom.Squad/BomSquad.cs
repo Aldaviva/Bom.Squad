@@ -1,11 +1,10 @@
-﻿using Bom.Squad.Internal.MethodRedirect;
-using System.Reflection;
+﻿using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Bom.Squad;
 
 /// <summary>
-/// <para>Allows you to modify the base class library <see cref="Encoding.UTF8"/> to not output byte order markers when encoding, although it will parse them correctly.</para>
+/// <para>Allows you to modify the base class library <see cref="Encoding.UTF8"/> to not output byte order markers when encoding, although it will still parse them correctly.</para>
 /// <para>Other encodings, such as <see cref="Encoding.Unicode"/> and <c>new UTF8Encoding(true, true)</c>, will not be affected.</para>
 ///
 /// <para>Usage:</para>
@@ -14,30 +13,29 @@ namespace Bom.Squad;
 public static class BomSquad {
 
     /// <summary>
-    /// A UTF-8 <see cref="Encoding"/> instance that does not output byte order markers when encoding, although it will parse them correctly.
-    /// It throws exceptions when invalid bytes are detected.
-    /// </summary>
-    public static readonly Encoding Utf8NoBom = new UTF8Encoding(false, true);
-
-    private static bool _armed = true;
-
-    /// <summary>
-    /// <para>Modify the base class library <see cref="Encoding.UTF8"/> to not output byte order markers when encoding, although it will parse them correctly.</para>
-    /// <para>After calling this method, subsequent calls to <see cref="Encoding.UTF8"/> will not write BOMs.</para>
+    /// <para>Modify the base class library <see cref="Encoding.UTF8"/> to not output byte order markers when encoding, although it will still parse them correctly.</para>
+    /// <para>After calling this method, the <see cref="Encoding.UTF8"/> instance will behave as if was constructed with the <c>encoderShouldEmitUTF8Identifier</c> constructor parameter set to false, so it will not write BOMs.</para>
     /// <para>Other encodings, such as <see cref="Encoding.Unicode"/> and <c>new UTF8Encoding(true, true)</c>, will not be affected.</para>
     /// </summary>
-    // ExceptionAdjustment: M:System.Type.GetProperty(System.String,System.Reflection.BindingFlags) -T:System.Reflection.AmbiguousMatchException
-    // ExceptionAdjustment: M:System.Type.GetMethod(System.String,System.Reflection.BindingFlags) -T:System.Reflection.AmbiguousMatchException
+    /// <exception cref="AccessViolationException">if dereferencing one of the pointers fails</exception>
     public static void DefuseUtf8Bom() {
-        if (_armed) {
-            MethodInfo oldMethod = typeof(Encoding).GetProperty("UTF8", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty)!.GetMethod;
-            MethodInfo newMethod = typeof(BomSquad).GetMethod(nameof(Utf8), BindingFlags.Static | BindingFlags.NonPublic)!;
+        Encoding utf8 = Encoding.UTF8;
+        if (utf8.GetPreamble().LongLength > 0) {
+            GCHandle gcHandle = GCHandle.Alloc(utf8, GCHandleType.WeakTrackResurrection);
+            IntPtr   pointer1 = GCHandle.ToIntPtr(gcHandle);
+            IntPtr   pointer2 = Marshal.ReadIntPtr(pointer1);
 
-            oldMethod.RedirectTo(newMethod, true);
-            _armed = false;
+            int emitUtf8IdentifierFieldOffset = PlatformInfo.IsNetCore switch {
+                true when PlatformInfo.Is64Bit  => 37,
+                true                            => 21,
+                false when PlatformInfo.Is64Bit => 38,
+                false                           => 22
+            };
+
+            Marshal.WriteByte(pointer2, emitUtf8IdentifierFieldOffset, 0); // set private readonly bool UTF8Encoding._emitUTF8Identifier to false
+
+            gcHandle.Free();
         }
     }
-
-    private static Encoding Utf8() => Utf8NoBom;
 
 }
