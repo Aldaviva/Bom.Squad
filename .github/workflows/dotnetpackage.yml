@@ -30,14 +30,14 @@ jobs:
 
     - name: Test x64
       run: |
-        dotnet test --arch x64 --no-build --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger "trx;LogFileName=TestResults-x64.xml" --logger "console;verbosity=detailed"
+        dotnet test --arch x64 --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger "trx;LogFileName=TestResults-x64.xml" --logger "console;verbosity=detailed"
         Out-File -InputObject "TEST_EXIT_CODE_X64=$LASTEXITCODE" -FilePath $env:GITHUB_ENV -Append -Encoding UTF8
         Move-Item Test/TestResults/*/coverage.info Test/TestResults/coverage-x64.info -ErrorAction Continue
         exit 0
 
     - name: Test x86
       run: |
-        dotnet test --arch x86 --no-build --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger "trx;LogFileName=TestResults-x86.xml" --logger "console;verbosity=detailed"
+        dotnet test --arch x86 --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger "trx;LogFileName=TestResults-x86.xml" --logger "console;verbosity=detailed"
         Out-File -InputObject "TEST_EXIT_CODE_X86=$LASTEXITCODE" -FilePath $env:GITHUB_ENV -Append -Encoding UTF8 
         Move-Item Test/TestResults/*/coverage.info Test/TestResults/coverage-x86.info -ErrorAction Continue
         exit 0
