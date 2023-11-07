@@ -75,7 +75,7 @@ If you're worried about forgetting to use `new UTF8Encoding(false, true)` instea
 1. Set **Dscription** to something like `UTF8 without BOM`.
 1. Click **Save**.
 
-![ReSharper custom pattern](https://raw.githubusercontent.com/Aldaviva/Bom.Squad/master/Bom.Squad/highlighting-pattern.png)
+![ReSharper custom pattern](https://raw.githubusercontent.com/Aldaviva/Bom.Squad/master/.github/images/highlighting-pattern.png)
 
 ### Cross-cutting program-wide fix
 
