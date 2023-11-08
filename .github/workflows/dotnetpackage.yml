@@ -23,18 +23,18 @@ jobs:
         domain: ${{github.repository_owner}}
 
     - name: Restore
-      run: dotnet restore --verbosity normal
+      run: dotnet restore
 
     - name: Build
-      run: dotnet build ${{ env.ProjectName }} --no-restore --configuration Release --verbosity normal
+      run: dotnet build ${{ env.ProjectName }} --no-restore --configuration Release
 
     - name: Test
       run: |
-        dotnet test --arch x64 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx --verbosity normal
+        dotnet test --arch x64 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx
         $TEST_EXIT_CODE_X64 = $LASTEXITCODE
         Get-ChildItem Test\TestResults\*\coverage.info | Rename-Item -NewName lcov.info
         
-        dotnet test --arch x86 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx --verbosity normal
+        dotnet test --arch x86 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx
         $TEST_EXIT_CODE_X86 = $LASTEXITCODE
         Get-ChildItem Test\TestResults\*\coverage.info | Rename-Item -NewName lcov.info
         
@@ -53,7 +53,7 @@ jobs:
       run: exit $env:TEST_EXIT_CODE
 
     - name: Pack
-      run: dotnet pack ${{ env.ProjectName }} --no-build --configuration Release --verbosity normal
+      run: dotnet pack ${{ env.ProjectName }} --no-build --configuration Release
 
     - name: Upload package
       uses: actions/upload-artifact@v3

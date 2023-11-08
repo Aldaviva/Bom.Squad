@@ -108,7 +108,7 @@ To fix this, you can disable UTF-8 BOM encoding for your entire program by modif
 using Bom.Squad;
 
 public class Program {
-    public static void Main(string[] args){
+    public static void Main(string[] args) {
         BomSquad.DefuseUtf8Bom();
 
         // rest of your program

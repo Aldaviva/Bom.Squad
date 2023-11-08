@@ -1,4 +1,6 @@
-﻿namespace Bom.Squad;
+﻿using System.Reflection;
+
+namespace Bom.Squad;
 
 internal static class Workarounds {
 
@@ -12,8 +14,11 @@ internal static class Workarounds {
     /// <para>https://www.nuget.org/packages/ZCS.Utf8Json</para>
     /// </summary>
     private static void FixUtf8Json() {
+        const string originalAssemblyName       = "Utf8Json";
+        const string namespaceQualifiedTypeName = "Utf8Json.JsonReader";
         try {
-            Type.GetType("Utf8Json.JsonReader, Utf8Json")?
+            (Type.GetType($"{namespaceQualifiedTypeName}, {originalAssemblyName}")
+                    ?? Type.GetType($"{namespaceQualifiedTypeName}, {Assembly.GetEntryAssembly()?.GetName().Name}"))? // ILRepack changes assembly name
                 .GetConstructor(new[] { typeof(byte[]) })?
                 .Invoke(new object[] { new[] { (byte) '1', (byte) '1', (byte) '1' } });
         } catch (Exception e) when (e is not OutOfMemoryException) { }
