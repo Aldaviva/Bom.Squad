@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Xunit.Abstractions;
 
+[assembly: CollectionBehavior(DisableTestParallelization = true)] // shared state is necessarily mutated
+
 namespace Test;
 
 public class BomSquadTest: IDisposable {
