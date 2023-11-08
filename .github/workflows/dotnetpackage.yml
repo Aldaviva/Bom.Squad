@@ -28,18 +28,17 @@ jobs:
     - name: Build
       run: dotnet build ${{ env.ProjectName }} --no-restore --configuration Release --verbosity normal
 
-    - name: Test x64
+    - name: Test
       run: |
-        dotnet test --arch x64 --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx --logger "console;verbosity=detailed"
-        Out-File -InputObject "TEST_EXIT_CODE_X64=$LASTEXITCODE" -FilePath $env:GITHUB_ENV -Append -Encoding UTF8
+        dotnet test --arch x64 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx --verbosity normal
+        $TEST_EXIT_CODE_X64 = $LASTEXITCODE
         Get-ChildItem Test\TestResults\*\coverage.info | Rename-Item -NewName lcov.info
-        exit 0
-
-    - name: Test x86
-      run: |
-        dotnet test --arch x86 --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx --logger "console;verbosity=detailed"
-        Out-File -InputObject "TEST_EXIT_CODE_X86=$LASTEXITCODE" -FilePath $env:GITHUB_ENV -Append -Encoding UTF8 
+        
+        dotnet test --arch x86 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx --verbosity normal
+        $TEST_EXIT_CODE_X86 = $LASTEXITCODE
         Get-ChildItem Test\TestResults\*\coverage.info | Rename-Item -NewName lcov.info
+        
+        Out-File -InputObject "TEST_EXIT_CODE=$($TEST_EXIT_CODE_X64 + $TEST_EXIT_CODE_X86)" -FilePath $env:GITHUB_ENV -Append -Encoding UTF8
         exit 0
 
     - name: Upload test report
@@ -50,11 +49,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Stop if x64 tests failed
-      run: exit $env:TEST_EXIT_CODE_X64
-
-    - name: Stop if x86 tests failed
-      run: exit $env:TEST_EXIT_CODE_X86
+    - name: Stop if tests failed
+      run: exit $env:TEST_EXIT_CODE
 
     - name: Pack
       run: dotnet pack ${{ env.ProjectName }} --no-build --configuration Release --verbosity normal

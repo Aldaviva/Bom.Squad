@@ -1,24 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net452;netcoreapp2.0</TargetFrameworks>
+        <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
 
-        <Version>0.1.0</Version>
+        <Version>0.2.0</Version>
         <Authors>Ben Hutchison</Authors>
         <Copyright>© 2023 $(Authors)</Copyright>
         <Company>$(Authors)</Company>
         <NoWarn>CS8524</NoWarn>
-        <CheckEolTargetFramework>false</CheckEolTargetFramework> <!-- It's just a library, I'm not actually using .NET Core 2 -->
 
         <PackageProjectUrl>https://github.com/Aldaviva/Bom.Squad</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Aldaviva/Bom.Squad.git</RepositoryUrl>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Description>Disable writing UTF-8 byte order marks (BOMs) in .NET</Description>
-        <PackageTags>utf utf8 unicode bom byte-order-mark</PackageTags>
+        <Description>Disable writing UTF-8 byte order marks (BOMs)</Description>
+        <PackageTags>utf utf8 unicode bom byte-order-mark encoding charset codepage</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -32,6 +31,7 @@
     <ItemGroup>
         <None Include="icon.png" Pack="true" PackagePath="\" />
         <None Include="..\Readme.md" Pack="true" PackagePath="\" />
+        <AdditionalFiles Include="ExceptionAdjustments.txt" />
         <InternalsVisibleTo Include="Test" />
     </ItemGroup>
 
