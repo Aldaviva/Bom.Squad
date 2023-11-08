@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
 
-        <Version>0.2.0</Version>
+        <Version>0.2.1</Version>
         <Authors>Ben Hutchison</Authors>
         <Copyright>© 2023 $(Authors)</Copyright>
         <Company>$(Authors)</Company>
