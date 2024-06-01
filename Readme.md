@@ -46,6 +46,7 @@ Examples of software that have encountered confusing, time-consuming errors beca
 - [Google Calendar](https://twitter.com/Aldaviva/status/1539351969667485696)
 - [SpamAssassin](https://twitter.com/Aldaviva/status/1226025597949730816)
 - [PagerDuty](https://github.com/Aldaviva/PagerDuty/commit/cf9567f374805f3894faa216873caa4d53ba8900)
+- [Debian APT](https://twitter.com/Aldaviva/status/1796978091799286232)
 
 In conclusion, Microsoft's valid but highly-incompatible defaults result in corruption when data is shared between Microsoft and non-Microsoft software.
 
