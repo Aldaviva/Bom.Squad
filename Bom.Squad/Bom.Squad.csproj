@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>net452;netstandard2.0;net6.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
 
-        <Version>0.2.1</Version>
+        <Version>0.3.0</Version>
         <Authors>Ben Hutchison</Authors>
-        <Copyright>© 2023 $(Authors)</Copyright>
+        <Copyright>© 2024 $(Authors)</Copyright>
         <Company>$(Authors)</Company>
         <NoWarn>CS8524</NoWarn>
 
@@ -26,21 +26,32 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <PackageReadmeFile>Readme.md</PackageReadmeFile>
+        <IsTrimmable>true</IsTrimmable>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="icon.png" Pack="true" PackagePath="\" />
         <None Include="..\Readme.md" Pack="true" PackagePath="\" />
         <AdditionalFiles Include="ExceptionAdjustments.txt" />
-        <InternalsVisibleTo Include="Test" />
+        <InternalsVisibleTo Include="Test;Performance" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     </ItemGroup>
 
     <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true' or '$(Configuration)' == 'Release'">
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
+
+    <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
+        <IsAotCompatible>true</IsAotCompatible>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="ILLink.Substitutions.xml">
+            <LogicalName>ILLink.Substitutions.xml</LogicalName>
+        </EmbeddedResource>
+    </ItemGroup>
 
 </Project>

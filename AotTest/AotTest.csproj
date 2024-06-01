@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <Configurations>Debug;Release;Release-AOT</Configurations>
+        <PublishTrimmed>true</PublishTrimmed>
+        <IsTrimmable>true</IsTrimmable>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)' == 'Release-AOT'">
+        <PublishAot>true</PublishAot>
+        <Optimize>True</Optimize>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ZCS.Utf8Json" Version="1.4.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Bom.Squad\Bom.Squad.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <TrimmerRootAssembly Include="Bom.Squad" />
+    </ItemGroup>
+
+</Project>

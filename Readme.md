@@ -31,11 +31,6 @@ BomSquad.DefuseUtf8Bom();
     - .NET 5 or later
     - .NET Core 2.0 or later
     - .NET Framework 4.5.2 or later
-- CPU architecture
-    - x86_64/x64
-    - x86
-    - ARM32/Aarch32
-    - ARM64/AArch64
 
 ## Problem
 
@@ -80,7 +75,7 @@ The most straightfoward fix for this problem is to manually construct a `UTF8Enc
 new StreamWriter(stream, new UTF8Encoding(false, true));
 ```
 
-In previous versions of .NET runtimes, there was a defect where constructing a `UTF8Encoding` with `encoderShouldEmitUTF8Identifier` set to `false` would also prevent it from *decoding* a UTF-8 string that started with a BOM, which required you to create multiple `UTF8Encoding` instances with different constructor parameters, one for encoding and one for decoding. Thankfully, this has been fixed in more recent runtimes — verified in .NET Framework 4.5.2, 4.6.2, 4.7.2, 4.8, .NET 6, and .NET 7. Therefore, you can just create `new UTF8Encoding(false, true)` and store it as a public static field somewhere that you can access anywhere in your codebase.
+In previous versions of .NET runtimes, there was a defect where constructing a `UTF8Encoding` with `encoderShouldEmitUTF8Identifier` set to `false` would also prevent it from *decoding* a UTF-8 string that started with a BOM, which required you to create multiple `UTF8Encoding` instances with different constructor parameters, one for encoding and one for decoding. Thankfully, this has been fixed in more recent runtimes — verified in .NET Framework ≥ 4.5.2 and .NET ≥ 6. Therefore, you can just create a `new UTF8Encoding(false, true)` and store it as a public static field somewhere that you can access anywhere in your codebase.
 
 #### Code inspection
 
@@ -93,16 +88,18 @@ If you're worried about forgetting to use `new UTF8Encoding(false, true)` instea
 1. Set **Replace pattern** to `new System.Text.UTF8Encoding(false, true)`.
 1. Enable **Format after replace**.
 1. Enable **Shorten references**.
-1. Set **Dscription** to something like `UTF8 without BOM`.
+1. Set **Description** to something like `UTF8 without BOM`.
 1. Click **Save**.
 
 ![ReSharper custom pattern](https://raw.githubusercontent.com/Aldaviva/Bom.Squad/master/.github/images/highlighting-pattern.png)
 
 ### Cross-cutting program-wide fix
 
-Managing all of those custom instances of `UTF8Encoder` can be annoying and hard to keep track of. There may not be a good place to share one `Encoding` instance, and some code may not let you specify your own `Encoding`.
+*This is the solution provided by this library.*
 
-To fix this, you can disable UTF-8 BOM encoding for your entire program by modifying the `Encoding.UTF8` instance at runtime to set its private readonly boolean field `_emitUTF8Identifier` to `false`. This functionality has been packed into the [**Bom.Squad**](https://www.nuget.org/packages/Bom.Squad) NuGet package.
+Managing all of those custom instances of `UTF8Encoding` can be annoying and hard to keep track of. There may not be a good place to share one `Encoding` instance, and some code may not let you specify your own `Encoding`.
+
+To fix this, you can disable UTF-8 BOM encoding for your entire program by modifying the existing shared `Encoding.UTF8` instance in-memory at runtime to set its private readonly boolean field [`_emitUTF8Identifier`](https://source.dot.net/System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Text/UTF8Encoding.cs.html#f0ca9b36d106c6bd) to `false`. This functionality has been packed into the [**Bom.Squad**](https://www.nuget.org/packages/Bom.Squad) NuGet package.
 
 ```cs
 using Bom.Squad;
@@ -111,9 +108,11 @@ public class Program {
     public static void Main(string[] args) {
         BomSquad.DefuseUtf8Bom();
 
-        // rest of your program
+        // the rest of your program
     }
 }
 ```
 
-Subsequent calls to `Encoding.UTF8` will return the orignal instance as though it had been constructed with its `encoderShouldEmitUTF8Identifier` constructor parameter set to `false`.
+The process-wide `Encoding.UTF8` instance will now behave as though it had been constructed with its `encoderShouldEmitUTF8Identifier` constructor parameter set to `false` instead of `true`.
+
+No modifications are made to other `UTF8Encoding` instances, other process, or any assembly files on disk.

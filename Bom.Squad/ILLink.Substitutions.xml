@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<linker>
+    <assembly fullname="Bom.Squad">
+        <type fullname="Bom.Squad.Workarounds">
+            <!-- Utf8Json does not even run in AOT programs, so we don't need to try to work around its UTF-8 crash when the BOM is defused, just throw a NotSupportedException which will be caught by the caller. -->
+            <method signature="System.Void FixUtf8Json()" body="remove" />
+        </type>
+    </assembly>
+</linker>

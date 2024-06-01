@@ -9,7 +9,7 @@
 
                     <!-- Exclusion rules are not synchronized with dotCover, which are controlled by *.sln.DotSettings -->
                     <!-- Syntax: https://github.com/coverlet-coverage/coverlet/blob/master/Documentation/MSBuildIntegration.md#filters -->
-                    <Exclude>[Test*]*,[Bom.Squad]Bom.Squad.Internal.MethodRedirect.*</Exclude>
+                    <Exclude>[Test*]*,[AotTest]*</Exclude>
                 </Configuration>
             </DataCollector>
         </DataCollectors>
