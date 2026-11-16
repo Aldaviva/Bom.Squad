@@ -39,11 +39,11 @@ jobs:
 
     - name: Test
       run: |
-        dotnet test --arch x64 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx
+        dotnet test Test --arch x64 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx
         $TEST_EXIT_CODE_X64 = $LASTEXITCODE
         Get-ChildItem Test\TestResults\*\coverage.info | Rename-Item -NewName lcov.info
         
-        dotnet test --arch x86 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx
+        dotnet test Test --arch x86 --configuration Release --collect:"XPlat Code Coverage" --settings Test/Test.runsettings --logger trx
         $TEST_EXIT_CODE_X86 = $LASTEXITCODE
         Get-ChildItem Test\TestResults\*\coverage.info | Rename-Item -NewName lcov.info
         
