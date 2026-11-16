@@ -18,7 +18,7 @@
 
 ## Quick Start
 ```cmd
-dotnet add package Bom.Squad
+dotnet package add Bom.Squad
 ```
 ```cs
 using Bom.Squad;
@@ -36,9 +36,9 @@ BomSquad.DefuseUtf8Bom();
 
 When serializing Unicode strings into bytes, there are several different strategies to choose from.
 
-UTF-16 is one such format, and it tranforms each codepoint (character) into two or four bytes. Since there are multiple bytes for each codepoint, it is important for the deserializer to determine the order of those bytes, as they can start with the most significant byte (big endian, network byte order) or the least significant byte (little endian, CPU byte order). To detect the serialized byte order, UTF-16 deserializers look for a well-known prefix of two bytes and use its value to determine the endianness (`0xFEFF` indicates UTF-16 BE, and `0xFFFE` indicates UTF-16 LE). This prefix left by the encoder is called the byte order mark (BOM).
+UTF-16 is one such format, and it tranforms each codepoint (character) into two or four bytes. Since there are multiple bytes for each codepoint, it is important for the deserializer to determine the order of those bytes, as they can start with the most significant byte (big endian, network byte order) or the least significant byte (little endian, CPU byte order). To detect the serialized byte order, UTF-16 deserializers look for a well-known prefix of two bytes and use its value to determine the endianness (`FE FF` indicates UTF-16 BE, and `FF FE` indicates UTF-16 LE). This prefix left by the encoder is called the byte order mark (BOM).
 
-UTF-8 is another Unicode transformation format, and each codepoint can be serialized into one to four bytes. However, unlike UTF-16, bytes in UTF-8 only have one ordering. It is invalid to shuffle the order of UTF-8 bytes. Therefore, UTF-8 does not require a byte order mark, as there is only one possible byte order. It is valid to include a BOM anyway (`0xEFBBBF`), but it doesn't actually mark a byte order — it only indicates that the bytes represent UTF-8 code units, as opposed to those of UTF-16 or ASCII or other encoding formats. This is sometimes called a UTF-8 Signature instead of a BOM.
+UTF-8 is another Unicode transformation format, and each codepoint can be serialized into one to four bytes. However, unlike UTF-16, bytes in UTF-8 only have one ordering. It is invalid to shuffle the order of UTF-8 bytes. Therefore, UTF-8 does not require a byte order mark, as there is only one possible byte order. It is valid to include a BOM anyway (`EF BB BF`), but it doesn't actually mark a byte order — it only indicates that the bytes represent UTF-8 code units, as opposed to those of UTF-16 or ASCII or other encoding formats. This is sometimes called a UTF-8 Signature instead of a BOM.
 
 Unfortunately, Microsoft has decided that UTF-8 byte streams should always be prefixed with a BOM, and most Microsoft products like .NET and PowerShell will add it. This is a very serious interoperability problem because most UTF-8 decoders (excluding those made by Microsoft) do not decode or interpret the BOM prefix, which results in 3 malformed bytes appearing at the beginning of all decoded strings instead of being stripped out by the decoder as intended. Furthermore, these bytes map to unprintable glyphs, so a visual inspection of the decoded string will not reveal the invisible reason the string has malformed data at the beginning, until it occurs to you to open a hex editor. Any further processing of this malformed data, such as pattern matching, parsing, or concatenating with other strings, will result in data corruption and incorrect results.
 

@@ -1,11 +1,14 @@
 using Bom.Squad;
 using FluentAssertions;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Xunit.Sdk;
+using Xunit.v3;
 
-[assembly: CollectionBehavior(DisableTestParallelization = true)] // shared state is necessarily mutated
+#pragma warning disable IDE0230
+
+[assembly: Parallelization(Mode = ParallelMode.None)] // shared state is necessarily mutated
 
 namespace Test;
 
@@ -58,7 +61,7 @@ public class BomSquadTest: IDisposable {
         Encode(input, new UTF8Encoding(true, true)).Should().Equal(expected);
     }
 
-    private static IEnumerable<byte> Encode(string input, Encoding encoding) {
+    private static byte[] Encode(string input, Encoding encoding) {
         using MemoryStream memoryStream = new();
         using (StreamWriter writer = new(memoryStream, encoding)) {
             writer.Write(input);

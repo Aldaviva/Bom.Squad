@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net452;netstandard2.0;net6.0</TargetFrameworks>
+        <TargetFrameworks>net452;netstandard2.0;net6.0;net8.0;net10.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
 
-        <Version>0.3.0</Version>
+        <Version>0.4.0</Version>
         <Authors>Ben Hutchison</Authors>
-        <Copyright>© 2024 $(Authors)</Copyright>
+        <Copyright>© 2026 $(Authors)</Copyright>
         <Company>$(Authors)</Company>
-        <NoWarn>CS8524</NoWarn>
 
         <PackageProjectUrl>https://github.com/Aldaviva/Bom.Squad</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/Aldaviva/Bom.Squad.git</RepositoryUrl>
+        <RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
+        <PackageReleaseNotes>$(PackageProjectUrl)/releases/tag/$(Version)</PackageReleaseNotes>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -30,28 +30,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="icon.png" Pack="true" PackagePath="\" />
-        <None Include="..\Readme.md" Pack="true" PackagePath="\" />
-        <AdditionalFiles Include="ExceptionAdjustments.txt" />
+        <None Include="..\Readme.md;icon.png" Pack="true" PackagePath="\" />
         <InternalsVisibleTo Include="Test;Performance" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="[10.0.*,10.0.200)" PrivateAssets="All" />
     </ItemGroup>
 
-    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true' or '$(Configuration)' == 'Release'">
+    <PropertyGroup Condition="'$(CI)' == 'true' or '$(Configuration)' != 'Debug'">
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
 
     <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
         <IsAotCompatible>true</IsAotCompatible>
     </PropertyGroup>
-
-    <ItemGroup>
-        <EmbeddedResource Include="ILLink.Substitutions.xml">
-            <LogicalName>ILLink.Substitutions.xml</LogicalName>
-        </EmbeddedResource>
-    </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 
@@ -36,7 +36,6 @@ public static class BomSquad {
     /// </summary>
     public static void DefuseUtf8Bom() {
         if (EmitUtf8Identifier) {
-            Workarounds.ApplyWorkarounds();
             EmitUtf8Identifier = false;
         }
     }
